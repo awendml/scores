@@ -1,0 +1,20 @@
+<?php
+// app/Http/Controllers/KlasemenController.php
+
+namespace App\Http\Controllers;
+
+use App\Models\Club;
+use Illuminate\Http\Request;
+
+class KlasemenController extends Controller
+{
+    public function index()
+    {
+        $klasemen = Club::select('id', 'nama', 'menang', 'seri', 'kalah', 'goal_menang', 'goal_kalah', 'point')
+            ->orderBy('point', 'desc')
+            ->orderBy('goal_menang', 'desc')
+            ->get();
+
+        return view('klasemen.index', compact('klasemen'));
+    }
+}
